@@ -1,115 +1,107 @@
-package com.may27.multipleInheritance;
+package com.may28.multilevel;
 
 public class Student {
-	protected int studentId;
 	protected String name;
-	protected double examFee;
-
-	public Student(int studentId, String name, double examFee) {
+	protected int rollNumber;
+	public Student(String name, int rollNumber) {
 		super();
-		this.studentId = studentId;
 		this.name = name;
-		this.examFee = examFee;
+		this.rollNumber = rollNumber;
 	}
-
-	@Override
-	public String toString() {
-		return "Student [studentId=" + studentId + ", name=" + name + ", examFee=" + examFee + "]";
+	public void displayDetails() {
+		System.out.println("Student [name=" + name + ", rollNumber=" + rollNumber + "]");
+		
 	}
-}
-
-class DayScholar extends Student {
-	protected double transportFee;
-
-	public DayScholar(int studentId, String name, double examFee, double transportFee) {
-		super(studentId, name, examFee);
-		this.transportFee = transportFee;
-		if (examFee < 0){
-			System.err.println("Exam fees cannot be negative");
-			System.exit(0);
-		}
-		if (name == "") {
-			System.err.println("Name cannot be negative");
-			System.exit(0);
-		}
+	public double calculatePercentage() {
+		
+		return 0;
 	}
-
-	@Override
-	public String toString() {
-		return "DayScholar =" + super.toString() + ", transportFee=" + transportFee + "]";
-	}
-
-	public double payFee(double amount) {
-		if(amount<0) {
-			System.err.println("amount cannot be negative");
-			System.exit(0);
-			}
-
-
-		double totalfee = examFee + transportFee;
-		if (totalfee < amount) {
-			double payAmount = amount - totalfee;
-			System.out.println("the payable amount " + payAmount);
-			totalfee -= amount;
-		} else if (totalfee > amount) {
-			double refund = totalfee - amount;
-			System.out.println("the refund amount " + refund);
-			totalfee -= amount;
-		}
-		return amount;
-
-	}
-
-}
-
-class Hosteller extends Student {
-	protected double hostelFee;
-
-	
-		public Hosteller(int studentId, String name, double examFee, double hostelFee) {
-		super(studentId, name, examFee);
-		this.hostelFee = hostelFee;
 	
 
-		if (examFee < 0){
-			System.err.println("Exam fees cannot be negative");
+}
+class SceinceStudent extends  Student{
+	private int physicsMarks;
+	private int chemistryMarks;
+	private int mathMarks;
+	public SceinceStudent(String name, int rollNumber, int physicsMarks, int chemistryMarks, int mathMarks) {
+		super(name, rollNumber);
+		if(rollNumber<0||chemistryMarks<0||mathMarks<0||physicsMarks<0) {
+			System.err.println("Error Invalid Input");
 			System.exit(0);
 		}
-		if (hostelFee < 0) {
-			System.err.println("transport fee cannot be negative");
-			System.exit(0);
-		}
-		if (name == "") {
-			System.err.println("Name cannot be negative");
-			System.exit(0);
-		}
+		this.physicsMarks = physicsMarks;
+		this.chemistryMarks = chemistryMarks;
+		this.mathMarks = mathMarks;
+	
 	}
-
+	public void displayDetails() {
+		System.out.println("SceinceStudent name=" + name + "\nrollNumber=" + rollNumber + "\nphysicsMarks=" + physicsMarks
+				+ "\nchemistryMarks=" + chemistryMarks + "\nmathMarks=" + mathMarks );
+		
+	}
+	
 	@Override
-	public String toString() {
-		return "Hosteller =" + super.toString() + ", hostelFee=" + hostelFee +"]";
-	}
 
-	public double payFee(double amount) {
-		if(amount<0) {
-			System.err.println("amount cannot be negative");
-			System.exit(0);
-
+	public double calculatePercentage() {
+		double total=(physicsMarks+chemistryMarks+mathMarks)/3;
+		if(total>90) {
+			System.out.println("Percentage:"+total);
+		}
+		else if(total<90&&total>75) {
+			System.out.println("Percentage:"+total);
 			
 		}
-
-		double totalfee = examFee + hostelFee;
-		if (totalfee < amount) {
-			double payAmount = amount - totalfee;
-			System.out.println("the payable amount " + payAmount);
-			totalfee -= amount;
-
-		} else if (totalfee > amount) {
-			double refund = totalfee - amount;
-			System.out.println("the refund amount " + refund);
-			totalfee -= amount;
+		else if(total<75&&total>50) {
+			System.out.println("Percentage:"+total);
 		}
-		return amount;
-
+		else {
+			System.out.println("Percentage:"+total);
+		}
+		return total;
 	}
+	
+	
+	
+}
+class ArtsStudent extends  Student{
+	private int historyMarks;
+	private int geographyMarks;
+	private int englishMarks;
+	public ArtsStudent(String name, int rollNumber, int historyMarks, int geographyMarks, int englishMarks) {
+		super(name, rollNumber);
+		if(rollNumber<0||historyMarks<0||geographyMarks<0||englishMarks<0) {
+			System.err.println("Error Invalid Input");
+			System.exit(0);
+		}
+		this.historyMarks = historyMarks;
+		this.geographyMarks = geographyMarks;
+		this.englishMarks = englishMarks;
+		
+	}
+
+	public void displayDetails() {
+		System.out.println("ArtsStudent name=" + name + "\n rollNumber=" + rollNumber + "\n historyMarks=" + historyMarks
+				+ "\n geographyMarks=" + geographyMarks + "\n englishMarks=" + englishMarks );
+		
+	}
+
+	public double calculatePercentage() {
+		double total=(geographyMarks+englishMarks+historyMarks)/3;
+		if(total>90) {
+			System.out.println("Percentage:"+total);
+		}
+		else if(total<90&&total>75) {
+			System.out.println("Percentage:"+total);
+			
+		}
+		else if(total<75&&total>50) {
+			System.out.println("Percentage:"+total);
+		}
+		else {
+			System.out.println("Percentage:"+total);
+		}
+		return total;
+	}
+	
+	
 }
